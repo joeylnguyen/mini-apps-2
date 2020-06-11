@@ -13,7 +13,7 @@ const Event = ({ data, setEventData, previousSearch, pageNumber }) => {
     <div>
       <ul className="event">
         <li>Date: {date}</li>
-        <li>Event: {description}</li>
+        <li>Description: {description}</li>
       </ul>
       <button onClick={handleEditClick}>Edit</button>
       {showModal ?
