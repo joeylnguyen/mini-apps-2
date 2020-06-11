@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Searchbar from './Searchbar.jsx';
 
 const App = () => {
   const [ eventData, setEventData ] = useState([]);
@@ -23,13 +24,11 @@ const App = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Search Historical Events:
-          <input type="text" value={query} onChange={handleChange}/>
-        </label>
-        <input type="submit" value="Search"/>
-      </form>
+      <Searchbar
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        query={query}
+      />
     </div>
   )
 };
