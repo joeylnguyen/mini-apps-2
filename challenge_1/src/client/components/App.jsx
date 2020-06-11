@@ -9,6 +9,8 @@ const App = () => {
   const [ pageCount, setPageCount ] = useState(0);
   const [ query, setQuery ] = useState('');
   const [ previousSearch, setPreviousSearch] = useState('');
+  const [ loading, setLoading ] = useState(false);
+  const [ searched, setSearched ] = useState(false);
 
   const handleChange = (event) => {
     setQuery(event.target.value);
@@ -16,6 +18,8 @@ const App = () => {
 
   const handleSubmit = () => {
     event.preventDefault();
+    setPageCount(0);
+    setLoading(true);
     getEventData(query)
     setPreviousSearch(query);
     setQuery('');
@@ -34,6 +38,8 @@ const App = () => {
 
         setPageCount(Math.ceil(eventCount/10));
         setEventData(results.data);
+        setLoading(false);
+        setSearched(true);
       })
       .catch((error) => console.log(error));
   };
@@ -46,9 +52,9 @@ const App = () => {
         handleSubmit={handleSubmit}
         query={query}
       />
-      <EventList className="eventList" eventData={eventData} />
+      {loading ? 'Getting results...' : <EventList className="eventList" eventData={eventData} searched={searched} />}
       {pageCount ?
-       <ReactPaginate
+        <ReactPaginate
           previousLabel={'previous'}
           nextLabel={'next'}
           breakLabel={'...'}
