@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Searchbar from './Searchbar.jsx';
+import EventList from './EventList.jsx';
 
 const App = () => {
   const [ eventData, setEventData ] = useState([]);
@@ -29,6 +30,7 @@ const App = () => {
         handleSubmit={handleSubmit}
         query={query}
       />
+      <EventList eventData={eventData} />
     </div>
   )
 };
