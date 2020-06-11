@@ -4,7 +4,7 @@ const Searchbar = ({ handleSubmit, handleChange, query }) => {
   return (
     <form className="searchbar" onSubmit={handleSubmit}>
       <input className="searchField" type="text" value={query} onChange={handleChange}/>
-      <input type="submit" value="Search"/>
+      <input className="searchButton" type="submit" value="Search"/>
     </form>
   )
 };

@@ -15,12 +15,17 @@ h1 {
   width: 500px;
 }
 
+.searchButton {
+  cursor: pointer;
+}
+
 .event li  {
   display: block;
 }
 
 .pagination {
   text-align: center;
+  cursor: pointer;
 }
 
 .pagination ul {
