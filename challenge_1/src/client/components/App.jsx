@@ -26,7 +26,7 @@ const App = () => {
   };
 
   const handlePageClick = (data) => {
-    const pageNumber = data.selected;
+    const pageNumber = data.selected + 1;
 
     getEventData(previousSearch, pageNumber)
   };
