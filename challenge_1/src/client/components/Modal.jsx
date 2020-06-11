@@ -13,7 +13,6 @@ const Modal = ({ setShowModal, date, description, setEventData, previousSearch, 
     event.preventDefault();
 
     const config = { "date": newDate, "description": newDescription }
-    console.log(config);
     editEventData(description, config)
       .then((result) => {
         console.log(result);
