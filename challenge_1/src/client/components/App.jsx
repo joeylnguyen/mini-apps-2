@@ -11,12 +11,13 @@ const App = () => {
   const handleSubmit = () => {
     event.preventDefault();
     getEventData(query)
+    setQuery('');
   };
 
   const getEventData = (query) => {
     console.log(query);
     axios.get(`http://localhost:3000/events?q=${query}`)
-      .then((results) => console.log(results))
+      .then((results) => setEventData(results.data))
       .catch((error) => console.log(error));
   };
 
@@ -25,7 +26,7 @@ const App = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Search Historical Events:
-          <input type="text" onChange={handleChange}/>
+          <input type="text" value={query} onChange={handleChange}/>
         </label>
         <input type="submit" value="Search"/>
       </form>
