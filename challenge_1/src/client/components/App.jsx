@@ -3,6 +3,8 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import Searchbar from './Searchbar.jsx';
 import EventList from './EventList.jsx';
+import Modal from './Modal.jsx';
+import { getEventData } from '../axios/axios.js';
 
 const App = () => {
   const [ eventData, setEventData ] = useState([]);
@@ -11,6 +13,7 @@ const App = () => {
   const [ previousSearch, setPreviousSearch] = useState('');
   const [ loading, setLoading ] = useState(false);
   const [ searched, setSearched ] = useState(false);
+  const [ pageNumber, setPageNumber ] = useState(1);
 
   const handleChange = (event) => {
     setQuery(event.target.value);
@@ -20,28 +23,33 @@ const App = () => {
     event.preventDefault();
     setPageCount(0);
     setLoading(true);
-    getEventData(query)
+    setTimeout(() => {
+      getEventData(query)
+        .then((results) => {
+          const eventCount = results.headers['x-total-count'];
+          setPageCount(Math.ceil(eventCount/10));
+          setEventData(results.data);
+          setLoading(false);
+          setSearched(true);
+        })
+        .catch((error) => console.log(error));
+    }, 500);
     setPreviousSearch(query);
     setQuery('');
   };
 
   const handlePageClick = (data) => {
-    const pageNumber = data.selected + 1;
-
-    getEventData(previousSearch, pageNumber)
-  };
-
-  const getEventData = (query, page = 1) => {
-    axios.get(`http://localhost:3000/events?q=${query}&_page=${page}`)
-      .then((results) => {
-        const eventCount = results.headers['x-total-count'];
-
-        setPageCount(Math.ceil(eventCount/10));
-        setEventData(results.data);
-        setLoading(false);
-        setSearched(true);
-      })
-      .catch((error) => console.log(error));
+    const newPageNumber = data.selected + 1;
+    setPageNumber(newPageNumber);
+    setLoading(true);
+    setTimeout(() => {
+      getEventData(previousSearch, newPageNumber)
+        .then((results) => {
+          setEventData(results.data);
+          setLoading(false);
+        })
+        .catch((error) => console.log(error));
+    }, 500);
   };
 
   return (
@@ -54,7 +62,14 @@ const App = () => {
       />
       {loading ?
       'Getting results...'
-      : <EventList className="eventList" eventData={eventData} searched={searched} />}
+      : <EventList
+          className="eventList"
+          eventData={eventData}
+          searched={searched}
+          previousSearch={previousSearch}
+          pageNumber={pageNumber}
+          setEventData={setEventData}
+        />}
       {pageCount ?
         <ReactPaginate
           previousLabel={'previous'}
