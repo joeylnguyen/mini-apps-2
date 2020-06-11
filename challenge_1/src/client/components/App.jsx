@@ -52,7 +52,9 @@ const App = () => {
         handleSubmit={handleSubmit}
         query={query}
       />
-      {loading ? 'Getting results...' : <EventList className="eventList" eventData={eventData} searched={searched} />}
+      {loading ?
+      'Getting results...'
+      : <EventList className="eventList" eventData={eventData} searched={searched} />}
       {pageCount ?
         <ReactPaginate
           previousLabel={'previous'}
