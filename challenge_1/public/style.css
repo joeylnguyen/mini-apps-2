@@ -9,6 +9,7 @@ h1 {
 
 .searchbar {
   text-align: center;
+  padding: 30px 0;
 }
 
 .searchField {
@@ -25,15 +26,15 @@ h1 {
 
 .pagination {
   text-align: center;
-  cursor: pointer;
+  padding-top: 30px;
 }
 
 .pagination ul {
   display: inline-block;
-  padding: 0 15px 0 15px;
 }
 
 .pagination li {
   display: inline-block;
-  padding: 0 15px 0 15px;
+  cursor: pointer;
+  padding: 0 15px;
 }

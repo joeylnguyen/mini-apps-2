@@ -5,7 +5,7 @@ const EventList = ({ eventData, searched }) => {
   const events = eventData.length ? eventData.map((event) => <Event data={event}/>) : 'Sorry, no results found!';
 
   return (
-    <div>
+    <div className="eventList">
       {searched ? events : null}
     </div>
   )
