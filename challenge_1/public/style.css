@@ -1,0 +1,34 @@
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+}
+
+.searchbar {
+  text-align: center;
+}
+
+.searchField {
+  width: 500px;
+}
+
+.event li  {
+  display: block;
+}
+
+.pagination {
+  text-align: center;
+}
+
+.pagination ul {
+  display: inline-block;
+  padding: 0 15px 0 15px;
+}
+
+.pagination li {
+  display: inline-block;
+  padding: 0 15px 0 15px;
+}

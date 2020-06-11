@@ -8,7 +8,7 @@
     "start": "npm run build && npm run server",
     "dev": "webpack --mode=development -w",
     "build": "webpack --mode=production",
-    "server": "json-server --watch ./data/db.json"
+    "server": "json-server ./data/db.json --watch"
   },
   "author": "Joey Nguyen",
   "license": "UNLICENSED",

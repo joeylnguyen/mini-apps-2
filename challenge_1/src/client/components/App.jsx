@@ -13,12 +13,14 @@ const App = () => {
   const handleChange = (event) => {
     setQuery(event.target.value);
   };
+
   const handleSubmit = () => {
     event.preventDefault();
     getEventData(query)
     setPreviousSearch(query);
     setQuery('');
   };
+
   const handlePageClick = (data) => {
     const pageNumber = data.selected;
 
@@ -26,8 +28,6 @@ const App = () => {
   };
 
   const getEventData = (query, page = 1) => {
-    console.log(query);
-    console.log(page);
     axios.get(`http://localhost:3000/events?q=${query}&_page=${page}`)
       .then((results) => {
         const eventCount = results.headers['x-total-count'];
@@ -40,13 +40,15 @@ const App = () => {
 
   return (
     <div>
+      <h1>Historical Events Finder</h1>
       <Searchbar
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         query={query}
       />
-      <EventList eventData={eventData} />
-      <ReactPaginate
+      <EventList className="eventList" eventData={eventData} />
+      {pageCount ?
+       <ReactPaginate
           previousLabel={'previous'}
           nextLabel={'next'}
           breakLabel={'...'}
@@ -59,6 +61,7 @@ const App = () => {
           subContainerClassName={'pages pagination'}
           activeClassName={'active'}
         />
+        : null}
     </div>
   )
 };
